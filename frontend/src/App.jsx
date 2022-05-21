@@ -8,16 +8,19 @@ import {
 } from "react-router-dom";
 import Login from "./pages/Login";
 import Main from "./pages/Main";
-import styled from 'styled-components'
-function App() {   
-    
+import styled from "styled-components";
+function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
   return (
     <Container>
       <Router>
         <Routes>
-          <Route path="/" element={ <Main />} />
+          {!loggedIn ? (
+            <Route path="/" element={<Login />} />
+          ) : (
+            <Route path="/" element={<Main />} />
+          )}
         </Routes>
       </Router>
     </Container>
@@ -31,6 +34,6 @@ const Container = styled.div`
   margin: auto;
   background-color: black;
   justify-content: center;
-`
+`;
 
 export default App;
