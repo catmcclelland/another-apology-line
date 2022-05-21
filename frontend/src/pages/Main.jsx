@@ -22,6 +22,8 @@ function Main() {
   const TWILIO_USERNAME = process.env.REACT_APP_TWILIO_ACCOUNT
   const TWILIO_AUTH = process.env.REACT_APP_TWILIO_AUTH
 
+  console.log(recordings)
+
   useEffect(() => {
     axios
       .get(
@@ -36,7 +38,7 @@ function Main() {
       .then((res) => {
         setData(res.data);
       });
-  }, []);
+  }, [TWILIO_USERNAME, TWILIO_AUTH]);
 
 
 
@@ -72,7 +74,7 @@ function Main() {
             <AudioSpectrum
               id="audio-canvas"
               height={400}
-              width={2000}
+              width={'2000'}
               audioId={`${recordings[track].media_url}.wav`}
               capColor={'hotpink'}
               capHeight={0}
@@ -128,7 +130,9 @@ const PlayButton = styled.div`
 const Background = styled.img`
   position: absolute;
   margin-top: -1px;
-  width: 152%;
+  left: 0;
+  width: 220%;
+  margin: -3px;
   @media (min-width: 800px) {
     width: 100%;
   }

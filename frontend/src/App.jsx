@@ -27,8 +27,8 @@ function App() {
 const Container = styled.div`
   display: flex;
   width: 100vw;
+  max-width: 100vw;
   height: 100vh;
-  margin: auto;
   background-color: black;
   justify-content: center;
 `
