@@ -5,6 +5,7 @@ import styled from 'styled-components'
 
 function Main() {
 
+
   const [data, setData] = useState([]);
 
   const USER_NAME = process.env.REACT_APP_TWILIO_ACCOUNT
@@ -68,6 +69,7 @@ function Main() {
      {sound}
 
   </div>;
+
 }
 
 const Visualizer = styled.div`
