@@ -1,26 +1,35 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import AudioSpectrum from 'react-audio-spectrum'
 import styled from 'styled-components'
+import { BsPlayCircle, BsStopCircle } from 'react-icons/bs'
+import TapeRecorder from '../images/taperecorder.gif'
+import TapeRecorderPause from '../images/taperecorderpaused.jpg'
+import answeringMachine from '../images/answering.mp3'
 
 function Main() {
 
+  const [data, setData] = useState(0);
+  const { recordings } = data
+  const randomTrack = (Math.random() * (data && recordings.length - 1))
+                           .toFixed(0)
+  const [playing, setPlaying] = useState(true)
+  const [track, setTrack] = useState(randomTrack)
 
-  const [data, setData] = useState([]);
+  const audioPlay = useRef();
+  let answer = new Audio(answeringMachine);
 
-  const USER_NAME = process.env.REACT_APP_TWILIO_ACCOUNT
-  const PASSWORD = process.env.REACT_APP_TWILIO_AUTH
-
-  console.log(process.env.REACT_APP_TWILIO_ACCOUNT_SID)
+  const TWILIO_USERNAME = process.env.REACT_APP_TWILIO_ACCOUNT
+  const TWILIO_AUTH = process.env.REACT_APP_TWILIO_AUTH
 
   useEffect(() => {
     axios
       .get(
-        `https://api.twilio.com/2010-04-01/Accounts/${USER_NAME}/Recordings.json`,
+`https://api.twilio.com/2010-04-01/Accounts/${TWILIO_USERNAME}/Recordings.json`,
         {
           auth: {
-            username: USER_NAME,
-            password: PASSWORD,
+            username: TWILIO_USERNAME,
+            password: TWILIO_AUTH,
           },
         }
       )
@@ -29,52 +38,100 @@ function Main() {
       });
   }, []);
 
-  console.log(data)
-
-  const { recordings } = data
-  const sound = recordings && recordings.map(recording => (
-    <div key={`${recording.media_url}.wav`}>
-    <audio
-      crossOrigin="anonymous"
-      id={`${recording.media_url}.wav`}
-      src={`${recording.media_url}.wav`}
-      controls
-    />
-
-    <Visualizer>
-      <AudioSpectrum
-        id="audio-canvas"
-        height={200}
-        width={1000}
-        audioId={`${recording.media_url}.wav`}
-        capColor={'red'}
-        capHeight={2}
-        meterWidth={10}
-        meterCount={512}
-        meterColor={[
-          { stop: 0, color: 'black' },
-          { stop: 0.5, color: 'black' },
-          { stop: 1, color: 'red' }
-        ]}
-        gap={1}
-      />
-    </Visualizer>
-    </div>
-  
-  ))
 
 
-  return <div>
-     
-     {sound}
+  const playSound = (e) => {
+    setPlaying(!playing)
+    if (playing) {
+      answer.play()
+      setTimeout(() => {
+        audioPlay.current.play()
+      }, 1000)
+    } else {
+      audioPlay.current.pause()
+      setTrack(randomTrack)
+    }
+  }
 
-  </div>;
+  return (
+    <>
+      {recordings &&
+        <div key={`${recordings[track].media_url}.wav`}>
+          <audio
+            crossOrigin="anonymous"
+            id={`${recordings[track].media_url}.wav`}
+            src={`${recordings[track].media_url}.wav`}
+            ref={audioPlay}
+            onEnded={() => {
+              setPlaying(!playing)
+              setTrack(randomTrack)
+            }}
+          />
 
+          <Visualizer>
+            <AudioSpectrum
+              id="audio-canvas"
+              height={400}
+              width={2000}
+              audioId={`${recordings[track].media_url}.wav`}
+              capColor={'hotpink'}
+              capHeight={0}
+              meterWidth={9}
+              meterCount={1000}
+              meterColor={[
+                { stop: .3, color: '#ffffffcc' }
+              ]}
+              gap={1}
+            />
+          </Visualizer>
+        </div>
+      }
+      {playing
+        ? <Background src={TapeRecorderPause} />
+        : <Background src={TapeRecorder} />
+      }
+      <PlayButton>
+        {playing
+          ? <BsPlayCircle size="300px" onClick={() => playSound()} />
+          : <BsStopCircle size="300px" onClick={() => playSound('id')} />
+        }
+      </PlayButton>
+    </>
+  )
 }
 
 const Visualizer = styled.div`
   display: flex;
-  width: 100%;
-  margin: auto;`
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  z-index: 1;
+`
+
+const PlayButton = styled.div`
+  display: flex;
+  margin: auto;
+  cursor: pointer;
+  color: white;
+  opacity: .5;
+  z-index: 10000;
+  transition: .2s;
+  &:hover {
+    opacity: .8;
+    transition: .2s;
+  }
+  @media (max-width: 500px) {
+    width: 200px;
+  }
+`
+
+const Background = styled.img`
+  position: absolute;
+  margin-top: -1px;
+  width: 152%;
+  @media (min-width: 800px) {
+    width: 100%;
+  }
+`
 
 export default Main;
