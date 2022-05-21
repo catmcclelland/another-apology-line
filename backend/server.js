@@ -13,7 +13,10 @@ app.post("/voice", (req, res) => {
     to the public so please do not identify yourself. talk for as long as 
     you want.`
   );
-  twiml.record();
+  twiml.record({
+    timeout: 15,
+    maxLength: 600,
+  });
 
   twiml.hangup();
 

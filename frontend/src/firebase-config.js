@@ -1,5 +1,5 @@
 // Import the functions you need from the SDKs you need
-import * as firebase from "firebase/app";
+
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import App from "./App";
