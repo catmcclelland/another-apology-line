@@ -8,21 +8,29 @@ import {
 } from "react-router-dom";
 import Login from "./pages/Login";
 import Main from "./pages/Main";
-function App() {
+
+import styled from 'styled-components'
+function App() {   
+    
+
   const [loggedIn, setLoggedIn] = useState(false);
 
   return (
-    <Router>
-      <Routes>
-        {!loggedIn ? (
-          <Route path="/" element={<Login />} />
-        ) : (
-          <Route path="/" element={<Main />} />
-        )}
-      </Routes>
-      <div className="App">HELLO</div>
-    </Router>
+    <Container>
+      <Router>
+        <Routes>
+          <Route path="/" element={ <Main />} />
+        </Routes>
+      </Router>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  margin: auto;
+`
 
 export default App;
