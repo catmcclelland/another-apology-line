@@ -1,38 +1,9 @@
-// import React from "react";
-// import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-
-// function Login() {
-//   const provider = new GoogleAuthProvider();
-//   const auth = getAuth();
-
-//   signInWithPopup(auth, provider)
-//     .then((result) => {
-//       // This gives you a Google Access Token. You can use it to access the Google API.
-//       const credential = GoogleAuthProvider.credentialFromResult(result);
-//       const token = credential.accessToken;
-//       // The signed-in user info.
-//       const user = result.user;
-//       // ...
-//     })
-//     .catch((error) => {
-//       // Handle Errors here.
-//       const errorCode = error.code;
-//       const errorMessage = error.message;
-//       // The email of the user's account used.
-//       const email = error.customData.email;
-//       // The AuthCredential type that was used.
-//       const credential = GoogleAuthProvider.credentialFromError(error);
-//       // ...
-//     });
-//   return <button>Login</button>;
-// }
-
-// export default Login;
 import React from "react";
-// import "./Login.css";
-// import Button from "@mui/material/Button";
 import { provider } from "../firebase-config";
 import { getAuth, signInWithPopup } from "firebase/auth";
+import styled from "styled-components";
+import { FcGoogle } from "react-icons/fc";
+import PaginatedSwiper from "../components/PaginatedSwiper";
 
 export default function Login() {
   const auth = getAuth();
@@ -41,9 +12,97 @@ export default function Login() {
       .then((re) => console.log(re))
       .catch((e) => console.log(e.message));
   };
+
   return (
-    <div className="login">
-      <button onClick={signIn}>Sign In</button>
+    <div>
+      {/* <LoginWrapper className="login"> */}
+      <Card>
+        <Text>
+          {/* <Swiper
+            pagination={{ dynamicBullets: true }}
+            modules={[Pagination]}
+            className="mySwiper">
+            <SwiperSlide>Slide 1</SwiperSlide>
+            <SwiperSlide>Slide 2</SwiperSlide>
+          </Swiper> */}
+          <PaginatedSwiper />
+          <GoogleSignIn onClick={signIn}>
+            <Icon>
+              <FcGoogle />
+            </Icon>
+            Sign In with Google
+          </GoogleSignIn>
+          <Continue>Continue without Login</Continue>
+        </Text>
+      </Card>
+      {/* </LoginWrapper> */}
     </div>
   );
 }
+// const LoginWrapper = styled.div`
+//   display: flex;
+//   width: 100vw;
+//   height: 100vh;
+//   margin: auto;
+//   background-color: white;
+//   justify-content: center;
+//   align-items: center;
+// `;
+const GoogleSignIn = styled.div`
+  width: 80%;
+  max-width: 20rem;
+  height: 3rem;
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 30px;
+  text-align: center;
+  background: white;
+  font-size: 1.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+`;
+const Continue = styled.div`
+  background: white;
+  width: 80%;
+  max-width: 20rem;
+  height: 3rem;
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 30px;
+  text-align: center;
+
+  font-size: 1.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+`;
+const Icon = styled.div`
+  margin-right: 1rem;
+  margin-bottom: -0.25rem;
+  display: inline;
+`;
+const Card = styled.div`
+  background: snow;
+  border-radius: 20px;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+`;
+
+const Text = styled.div`
+  background: gainsboro;
+  border-radius: 20px;
+  width: 80%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  align-items: center;
+  justify-content: flex-end;
+`;
