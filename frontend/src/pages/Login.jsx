@@ -3,10 +3,8 @@ import { provider } from "../firebase-config";
 import { getAuth, signInWithPopup } from "firebase/auth";
 import styled from "styled-components";
 import { FcGoogle } from "react-icons/fc";
+import PaginatedSwiper from "../components/PaginatedSwiper";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import { Pagination } from "swiper";
 export default function Login() {
   const auth = getAuth();
   const signIn = () => {
@@ -20,13 +18,14 @@ export default function Login() {
       {/* <LoginWrapper className="login"> */}
       <Card>
         <Text>
-          <Swiper
+          {/* <Swiper
             pagination={{ dynamicBullets: true }}
             modules={[Pagination]}
             className="mySwiper">
             <SwiperSlide>Slide 1</SwiperSlide>
             <SwiperSlide>Slide 2</SwiperSlide>
-          </Swiper>
+          </Swiper> */}
+          <PaginatedSwiper />
           <GoogleSignIn onClick={signIn}>
             <Icon>
               <FcGoogle />
