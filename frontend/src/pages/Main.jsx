@@ -7,14 +7,19 @@ function Main() {
 
   const [data, setData] = useState([]);
 
+  const USER_NAME = process.env.REACT_APP_TWILIO_ACCOUNT
+  const PASSWORD = process.env.REACT_APP_TWILIO_AUTH
+
+  console.log(process.env.REACT_APP_TWILIO_ACCOUNT_SID)
+
   useEffect(() => {
     axios
       .get(
-        `https://api.twilio.com/2010-04-01/Accounts/AC377baca68990d9898d47d970754fb0f6/Recordings.json`,
+        `https://api.twilio.com/2010-04-01/Accounts/${USER_NAME}/Recordings.json`,
         {
           auth: {
-            username: 'AC377baca68990d9898d47d970754fb0f6',
-            password: '24dda8d54c67047a0200f266f21d4ee5',
+            username: USER_NAME,
+            password: PASSWORD,
           },
         }
       )
@@ -46,8 +51,8 @@ function Main() {
         meterWidth={10}
         meterCount={512}
         meterColor={[
-          { stop: 0, color: '#f00' },
-          { stop: 0.5, color: '#0CD7FD' },
+          { stop: 0, color: 'black' },
+          { stop: 0.5, color: 'black' },
           { stop: 1, color: 'red' }
         ]}
         gap={1}
