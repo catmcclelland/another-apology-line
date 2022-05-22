@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla&display=swap');
+
 body {
   margin: 0px;
 
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: Karla, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
 
     sans-serif;
@@ -10,9 +12,38 @@ body {
   max-width: 600px;
   overflow-y: hidden;
   overflow-x: hidden;
+  color: #222222
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.marquee {
+  display: flex;
+  width: 2060px;
+  position: absolute;
+  top: 210px;
+  background-color: transparent;
+  white-space: nowrap;
+}
+
+.marquee-text {
+  display: inline-block;
+  width: 1000px;
+  font-size: 60px;
+  font-weight: 900;
+  color: #222222;
+  animation: scroll 15s linear infinite;
+}
+
+.marquee-text:before {
+  content: "CONFESS.";
+}
+
+@keyframes scroll {
+  100% {
+    transform: translateX(-100%);
+  }
 }
