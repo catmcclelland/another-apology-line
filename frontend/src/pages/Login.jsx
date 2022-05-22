@@ -5,8 +5,11 @@ import styled from "styled-components";
 import { FcGoogle } from "react-icons/fc";
 import { BsArrowRight } from 'react-icons/bs'
 import Marquee from "../components/Marquee";
+import { useNavigate } from "react-router-dom";
 
 export default function Login({ setLoggedIn }) {
+  
+  const navigate = useNavigate()
   const auth = getAuth();
   const signIn = () => {
     signInWithPopup(auth, provider)
@@ -18,6 +21,7 @@ export default function Login({ setLoggedIn }) {
       .catch((e) => console.log(e.message));
   };
   const continueWithoutLogin = () => {
+    navigate('/player')
     window.localStorage.setItem("currentLoggedIn", true);
     setLoggedIn(true);
   };
@@ -28,7 +32,7 @@ export default function Login({ setLoggedIn }) {
               <Content>
                 <Sorry>SORRY?</Sorry>
                 <Criminals>CRIMINALS,</Criminals>
-                <Riffraff>NE'ER-DO-WELLS AND RIFFRAFF:</Riffraff>
+                <Riffraff>RUFFIANS AND RIFFRAFF:</Riffraff>
                 <Marquee />
                 <Goals>
                   <i>

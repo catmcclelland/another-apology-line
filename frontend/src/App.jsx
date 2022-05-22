@@ -20,8 +20,10 @@ function App() {
           {!logInLocal ? (
             <Route path="/" element={<Login setLoggedIn={setLoggedIn} />} />
           ) : (
-            <Route path="/" element={<Main />} />
+            <Route path="/" element={<Main setLoggedIn={setLoggedIn} />} />
           )}
+          <Route path="/signin" element={<Login />} />
+          <Route path="/player" element={<Main />} />
         </Routes>
       </Router>
     </Container>
