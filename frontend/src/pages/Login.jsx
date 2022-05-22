@@ -95,14 +95,20 @@ const Sorry = styled.div`
   font-weight: 900;
   margin-bottom: -10px;
   border-bottom: 30px solid #222222;
-  top: -10px;`
+  top: -10px;
+  @media (max-height: 680px) {
+    border: none;
+  }`
 
 const Criminals = styled.div`
   display: flex;
   position: absolute;
   font-size: 80px;
   letter-spacing: -10px;
-  top: 100px;`
+  top: 100px;
+  @media (max-height: 680px) {
+    top: 50px;
+  }`
 
 const Riffraff = styled.div`
   display: flex;
@@ -110,7 +116,10 @@ const Riffraff = styled.div`
   font-size: 30px;
   font-weight:900;
   letter-spacing: -3px;
-  top: 180px;`
+  top: 180px;
+  @media (max-height: 680px) {
+    top: 120px;
+  }`
 
 const Goals = styled.div`
   display: flex;
@@ -154,7 +163,10 @@ const Phone = styled.div`
   width: 375px;
   margin-top: 40px;
   text-align: justify;
-  text-transform: uppercase;`
+  text-transform: uppercase;
+  @media (max-height: 680px) {
+    top: 110px;
+  }`
 
 const Closer = styled.div`
   display: flex;
