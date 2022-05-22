@@ -27,7 +27,7 @@ export default function Login({ setLoggedIn }) {
   };
   return (
     <div>
-      
+        <Fixed>
             <Container>
               <Content>
                 <Sorry>SORRY?</Sorry>
@@ -68,11 +68,15 @@ export default function Login({ setLoggedIn }) {
                 Continue as Guest
               </Continue>
             </Container>
+            </Fixed>
      
     </div>
   );
 }
 
+const Fixed = styled.div`
+  position: fixed;
+  left: 0px;`
 const Container = styled.div`
   display: flex;
   background: salmon;
