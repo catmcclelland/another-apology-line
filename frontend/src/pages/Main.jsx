@@ -6,8 +6,12 @@ import { BsPlayCircle, BsStopCircle } from "react-icons/bs";
 import TapeRecorder from "../images/taperecorder.gif";
 import TapeRecorderPause from "../images/taperecorderpaused.jpg";
 import answeringMachine from "../images/answering.mp3";
+import { useNavigate } from "react-router-dom";
+import { IoMdArrowRoundBack, IoMdSkipBackward } from "react-icons/io";
+import { AiFillGithub } from "react-icons/ai";
 
 function Main() {
+  const navigate = useNavigate();
   const [data, setData] = useState(0);
   const { recordings } = data;
   const randomTrack = (Math.random() * (data && recordings.length - 1)).toFixed(
@@ -22,7 +26,7 @@ function Main() {
   const TWILIO_USERNAME = process.env.REACT_APP_TWILIO_ACCOUNT;
   const TWILIO_AUTH = process.env.REACT_APP_TWILIO_AUTH;
 
-  console.log(recordings)
+  console.log(recordings);
 
   useEffect(() => {
     axios
@@ -53,6 +57,10 @@ function Main() {
     }
   };
 
+  const goBack = () => {
+    navigate("/signin");
+  };
+
   return (
     <>
       {recordings && (
@@ -72,7 +80,7 @@ function Main() {
             <AudioSpectrum
               id="audio-canvas"
               height={400}
-              width={'2000'}
+              width={"2000"}
               audioId={`${recordings[track].media_url}.wav`}
               capColor={"hotpink"}
               capHeight={0}
@@ -96,6 +104,21 @@ function Main() {
           <BsStopCircle size="300px" onClick={() => playSound("id")} />
         )}
       </PlayButton>
+      <Back>
+        <IoMdArrowRoundBack
+          onClick={goBack}
+          size="50px"
+          style={{ color: "white" }}
+        />
+      </Back>
+
+      <Git>
+        <a
+          href="https://github.com/catmcclelland/another-apology-line"
+          target="_blank">
+          <AiFillGithub size="50px" style={{ color: "white" }} />
+        </a>
+      </Git>
     </>
   );
 }
@@ -133,6 +156,28 @@ const Background = styled.img`
   margin: -3px;
   @media (min-width: 800px) {
     width: 100%;
+  }
+`;
+
+const Back = styled.div`
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  cursor: pointer;
+  opacity: 0.5;
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+const Git = styled.div`
+  position: absolute;
+  bottom: 20px;
+  right: 50px;
+  cursor: pointer;
+  opacity: 0.5;
+  &:hover {
+    opacity: 1;
   }
 `;
 
