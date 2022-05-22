@@ -174,7 +174,7 @@ const Back = styled.div`
 const Git = styled.div`
   position: absolute;
   bottom: 20px;
-  right: 50px;
+  right: 30px;
   cursor: pointer;
   opacity: 0.5;
   z-index: 1000000000;
