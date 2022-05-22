@@ -155,7 +155,7 @@ const Background = styled.img`
   width: 220%;
   margin: -3px;
   @media (min-width: 800px) {
-    width: 100%;
+    width: 300%;
   }
 `;
 
