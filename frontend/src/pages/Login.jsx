@@ -140,6 +140,9 @@ const Disclaimer = styled.div`
     margin-top: 25px;
     letter-spacing: -2px;
     width: 360px;
+  }
+  @media (max-height: 800px) {
+    display: none;
   }`
 
 const Phone = styled.div`
@@ -207,9 +210,6 @@ const Continue = styled.div`
   cursor: pointer;
   &:hover {
     text-decoration: underline;
-  }
-  @media (max-height: 760px) {
-    display: none;
   }`
 
 const Icon = styled.div`
