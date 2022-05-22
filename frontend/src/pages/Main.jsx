@@ -165,6 +165,7 @@ const Back = styled.div`
   left: 20px;
   cursor: pointer;
   opacity: 0.5;
+  z-index: 10000000000;
   &:hover {
     opacity: 1;
   }
@@ -176,6 +177,7 @@ const Git = styled.div`
   right: 50px;
   cursor: pointer;
   opacity: 0.5;
+  z-index: 1000000000;
   &:hover {
     opacity: 1;
   }
