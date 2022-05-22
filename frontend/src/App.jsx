@@ -17,7 +17,7 @@ function App() {
     <Container>
       <Router>
         <Routes>
-          {!loggedIn || !logInLocal ? (
+          {!logInLocal ? (
             <Route path="/" element={<Login setLoggedIn={setLoggedIn} />} />
           ) : (
             <Route path="/" element={<Main />} />
