@@ -28,7 +28,7 @@ export default function Login({ setLoggedIn }) {
               <Content>
                 <Sorry>SORRY?</Sorry>
                 <Criminals>CRIMINALS,</Criminals>
-                <Riffraff>NE'ER-DO-WELLS AND RIFFRAFF</Riffraff>
+                <Riffraff>NE'ER-DO-WELLS AND RIFFRAFF:</Riffraff>
                 <Marquee />
                 <Goals>
                   <i>
