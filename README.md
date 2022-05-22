@@ -57,7 +57,7 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://imsorry.vercel.app/)
+[product-screenshot](https://imsorry.vercel.app/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
