@@ -11,7 +11,6 @@ export default function Login(props) {
   const signIn = () => {
     signInWithPopup(auth, provider)
       .then((re) => {
-        console.log(re);
         props.setLoggedIn(true);
         window.localStorage.setItem("currentLoggedIn", re.user.uid);
       })
