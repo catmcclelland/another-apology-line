@@ -164,4 +164,4 @@ Project Link: [https://github.com/catmcclelland/another-apology-line](https://gi
 [license-url]: https://github.com/catmcclelland/another-apology-line/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: [images/screenshot.png](https://i.ibb.co/N9CqJvf/login-screen-apology.png)
