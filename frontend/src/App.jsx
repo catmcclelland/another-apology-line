@@ -9,15 +9,16 @@ import {
 import Login from "./pages/Login";
 import Main from "./pages/Main";
 import styled from "styled-components";
+import "swiper/css/bundle";
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
-
+  const logInLocal = window.localStorage.getItem("currentLoggedIn");
   return (
     <Container>
       <Router>
         <Routes>
-          {!loggedIn ? (
-            <Route path="/" element={<Login />} />
+          {!loggedIn || !logInLocal ? (
+            <Route path="/" element={<Login setLoggedIn={setLoggedIn} />} />
           ) : (
             <Route path="/" element={<Main />} />
           )}

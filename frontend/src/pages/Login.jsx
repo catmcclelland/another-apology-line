@@ -4,35 +4,42 @@ import { getAuth, signInWithPopup } from "firebase/auth";
 import styled from "styled-components";
 import { FcGoogle } from "react-icons/fc";
 import PaginatedSwiper from "../components/PaginatedSwiper";
+import { Navigate } from "react-router-dom";
 
-export default function Login() {
+export default function Login(props) {
   const auth = getAuth();
   const signIn = () => {
     signInWithPopup(auth, provider)
-      .then((re) => console.log(re))
+      .then((re) => {
+        console.log(re);
+        props.setLoggedIn(true);
+        window.localStorage.setItem("currentLoggedIn", re.user.uid);
+      })
       .catch((e) => console.log(e.message));
   };
-
+  const continueWithoutLogin = () => {
+    window.localStorage.setItem("currentLoggedIn", true);
+    props.setLoggedIn(true);
+  };
   return (
     <div>
       {/* <LoginWrapper className="login"> */}
       <Card>
         <Text>
-          {/* <Swiper
-            pagination={{ dynamicBullets: true }}
-            modules={[Pagination]}
-            className="mySwiper">
-            <SwiperSlide>Slide 1</SwiperSlide>
-            <SwiperSlide>Slide 2</SwiperSlide>
-          </Swiper> */}
-          <PaginatedSwiper />
-          <GoogleSignIn onClick={signIn}>
-            <Icon>
-              <FcGoogle />
-            </Icon>
-            Sign In with Google
-          </GoogleSignIn>
-          <Continue>Continue without Login</Continue>
+          <Carousel>
+            <PaginatedSwiper />
+          </Carousel>
+          <Box>
+            <GoogleSignIn onClick={signIn}>
+              <Icon>
+                <FcGoogle />
+              </Icon>
+              Sign In with Google
+            </GoogleSignIn>
+            <Continue onClick={continueWithoutLogin}>
+              Continue without Login
+            </Continue>
+          </Box>
         </Text>
       </Card>
       {/* </LoginWrapper> */}
@@ -48,9 +55,17 @@ export default function Login() {
 //   justify-content: center;
 //   align-items: center;
 // `;
+const Carousel = styled.div`
+  width: 95%;
+  height: 80%;
+  margin: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 const GoogleSignIn = styled.div`
   width: 80%;
-  max-width: 20rem;
+  min-width: 15rem;
   height: 3rem;
   cursor: pointer;
   border: 1px solid black;
@@ -66,7 +81,7 @@ const GoogleSignIn = styled.div`
 const Continue = styled.div`
   background: white;
   width: 80%;
-  max-width: 20rem;
+  min-width: 15rem;
   height: 3rem;
   cursor: pointer;
   border: 1px solid black;
@@ -104,5 +119,7 @@ const Text = styled.div`
   flex-direction: column;
   margin: auto;
   align-items: center;
-  justify-content: flex-end;
+`;
+const Box = styled.div`
+  bottom: 0;
 `;
